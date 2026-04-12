@@ -18,8 +18,7 @@ body {
   color: var(--white);
   font-family: var(--ff-sans);
   font-weight: 300;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -48,7 +47,7 @@ nav ul { display: flex; gap: 2rem; flex: 1; }
 nav ul a {
   font-size: 0.75rem; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--muted);
-  transition: color var(--ease);
+  transition: color var(--ease); font-weight: bold;
 }
 nav ul a:hover { color: var(--white); }
 nav ul a.active { color: var(--gold); }
@@ -75,7 +74,7 @@ main {
   overflow: hidden;
 }
 
-/* three parallelogram images, right-aligned behind text */
+/* images posters */
 .backdrops {
   position: absolute;
   right: 0; top: 0; bottom: 0;
@@ -124,4 +123,52 @@ main {
   font-size: 1rem;
   color: var(--muted);
   letter-spacing: 0.02em;
+  font-weight: bold;
+}
+
+/* ── Films Section ── */
+.films-section {
+    padding: 4rem 2.5rem; /* Matches your navbar spacing */
+    background: var(--bg);
+    position: relative;
+    z-index: 5; /* Ensures it sits above the hero images */
+}
+
+.films-section h2 {
+    padding-left: 5px;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.movie-slider {
+    display: flex;
+    gap: 1.5rem; /* Space between posters */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    padding-bottom: 5rem;
+    
+    /* Smooth scrolling physics */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide the ugly default scrollbar for a cleaner UI */
+.movie-slider::-webkit-scrollbar {
+    display: none; 
+}
+
+.movie-card {
+    flex: 0 0 auto; /* Prevents the cards from shrinking to fit the screen */
+    width: 200px;
+    aspect-ratio: 2 / 3; /* Standard movie poster ratio */
+    background-color: #222;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform var(--ease);
+}
+
+/* Give it a slight pop when you hover */
+.movie-card:hover {
+    transform: scale(1.05);
 }
