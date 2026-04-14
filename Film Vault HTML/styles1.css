@@ -187,3 +187,94 @@ main {
   font-size: 15px;
   font-weight: lighter;
 }
+/* Film Detail — supplements styles.css */
+
+.backdrop {
+  margin-top: 64px; height: 46vh; min-height: 280px;
+  background: linear-gradient(135deg, #0e0c09 0%, #1c1508 50%, #0e0c09 100%);
+  position: relative;
+}
+.backdrop::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, #0b0b0b 100%);
+}
+
+.detail-main {
+  max-width: 1100px; margin: -90px auto 0; padding: 0 2.5rem;
+  display: grid; grid-template-columns: 180px 1fr;
+  gap: 2.5rem; align-items: start;
+  position: relative; z-index: 2;
+  height: auto; 
+  overflow: visible;
+}
+
+.poster {
+  width: 100%; aspect-ratio: 2/3;
+  background: linear-gradient(145deg, #1f1f1f, #333);
+  border-radius: 6px; border: 1px solid rgba(200,168,75,.2);
+  box-shadow: 0 16px 48px rgba(0,0,0,.7);
+}
+.poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the magic command */
+    border-radius: inherit; /* Keeps the rounded corners */
+}
+
+.eyebrow {
+  font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+}
+
+.detail-info h1 {
+  font-family: var(--ff-serif); font-style: italic; font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 0.4rem;
+}
+
+.tagline { font-style: italic; color: rgb(210, 220, 33); font-size: 0.9rem; margin-bottom: 1rem; }
+
+.rating {
+  font-family: var(--ff-serif); font-size: 2.8rem; font-weight: 900;
+  color: var(--gold); line-height: 1; margin-bottom: 0.9rem;
+}
+.rating span { font-size: 1rem; color: #444; }
+
+.meta-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.meta-pills span {
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border);
+  border-radius: 99px; padding: 0.2rem 0.7rem;
+}
+
+/* shared section layout */
+.synopsis, .cast, .reviews {
+  max-width: 1100px; margin: 1.8rem auto 0; padding: 0 2.5rem;
+}
+.synopsis { border-top: 1px solid var(--border); padding-top: 1.8rem; }
+.reviews { margin-bottom: 4rem; }
+
+.synopsis h3, .cast h3, .reviews h3 {
+  font-family: var(--ff-serif); font-style: italic;
+  font-size: 1.2rem; margin-bottom: 0.9rem;
+}
+.synopsis p { font-size: 0.9rem; color: var(--muted); max-width: 680px; line-height: 1.85; }
+
+.cast-row {
+  display: flex; gap: 1.2rem; overflow-x: auto;
+  padding-bottom: 0.5rem; scrollbar-width: none;
+}
+.cast-row::-webkit-scrollbar { display: none; }
+
+.cast-card {
+  flex-shrink: 0; width: 68px; height: 68px; border-radius: 50%;
+  background: #1f1f1f; border: 1px solid var(--border);
+  transition: border-color var(--ease); cursor: pointer;
+}
+.cast-card:hover { border-color: var(--gold); }
+
+.review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+.review-card {
+  height: 110px; border-radius: 6px; background: #161616;
+  border: 1px solid var(--border); transition: border-color var(--ease); cursor: pointer;
+}
+.review-card:hover { border-color: rgba(200,168,75,.2); }
