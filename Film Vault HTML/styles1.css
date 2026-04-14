@@ -172,3 +172,18 @@ main {
 .movie-card:hover {
     transform: scale(1.05);
 }
+
+.ending
+{
+  background: var(--gold);
+  color: var(--white);
+  font-weight: bolder;
+  text-align: center;
+}
+
+.spanner
+{
+  vertical-align: super;
+  font-size: 15px;
+  font-weight: lighter;
+}
