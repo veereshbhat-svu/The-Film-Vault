@@ -12,7 +12,7 @@
     <a href="index.html" class="logo">The Film <span>Vault</span></a>
     <ul>
       <li><a href="index.html">Discover</a></li>
-      <li><a href="page 2.html">Movie Review</a></li>
+      <li><a href="page 2.html" class="active">Movie Review</a></li>
       <li><a href="page 3.html">Top Charts</a></li>
       <li><a href="#">About Us</a></li>
     </ul>
@@ -22,7 +22,6 @@
   <div class="backdrop"></div>
 
   <main class="detail-main">
-
     <div class="poster">
       <img src="https://m.media-amazon.com/images/M/MV5BMzBkZmQ0NjMtNTZlMy00ZjdlLTg5ODUtYWFlNGM0YzE3MTg0XkEyXkFqcGc@._V1_.jpg" alt="One Battle After Another Poster">
     </div>
@@ -38,7 +37,6 @@
         <span>English</span>
       </div>
     </div>
-
   </main>
 
   <section class="synopsis">
@@ -54,15 +52,15 @@
         <p class="cast-name">Leonardo DiCaprio</p>
       </div>
       <div class="cast-card">
-        <img src="https://resizing.flixster.com/2h28sxNz0VQO4pGNHZzu76Oe634=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/1332_v9_ba.jpg" alt="Cast member">
+        <img src="https://resizing.flixster.com/2h28sxNz0VQO4pGNHZzu76Oe634=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/1332_v9_ba.jpg" alt="Sean Penn">
         <p class="cast-name">Sean Penn</p>
       </div>
       <div class="cast-card">
-        <img src="https://m.media-amazon.com/images/M/MV5BZThlZmEzMGEtMzBhOS00NDNlLTk3YTMtZmRlMzllNmMxYzE3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Cast member">
+        <img src="https://m.media-amazon.com/images/M/MV5BZThlZmEzMGEtMzBhOS00NDNlLTk3YTMtZmRlMzllNmMxYzE3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Chase Infiti">
         <p class="cast-name">Chase Infiti</p>
       </div>
       <div class="cast-card">
-        <img src="https://m.media-amazon.com/images/M/MV5BMTkzODQ4NzU1N15BMl5BanBnXkFtZTcwOTUzMzc5Mg@@._V1_FMjpg_UX1000_.jpg" alt="Cast member">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTkzODQ4NzU1N15BMl5BanBnXkFtZTcwOTUzMzc5Mg@@._V1_FMjpg_UX1000_.jpg" alt="Benicio del Toro">
         <p class="cast-name">Benicio del Toro</p>
       </div>
       <div class="cast-card">
@@ -75,7 +73,6 @@
   <section class="reviews">
     <h3>Reviews</h3>
     <div class="review-grid">
-
       <div class="review-card">
         <div class="review-header">
           <div>
@@ -108,19 +105,162 @@
         </div>
         <p class="review-text">Watched it twice already. The cinematography alone deserves every Oscar it won. Unforgettable.</p>
       </div>
+    </div>
+  </section>
 
+  <section class="write-review">
+    <h3>Write a Review</h3>
+    <form class="review-form" id="reviewForm">
+      <div class="star-picker" id="starPicker" role="group" aria-label="Star rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+        <span class="star-label" id="starLabel">Select a rating</span>
+      </div>
+      
+      <input class="rf-input" type="text" id="rfName" placeholder="Your name" maxlength="40" autocomplete="off" />
+      
+      <input class="rf-input" type="text" id="rfPhone" placeholder="Your 10-digit phone number" autocomplete="off" />
+      
+      <textarea class="rf-textarea" id="rfText" placeholder="Share your thoughts on the film…" maxlength="400" rows="4"></textarea>
+      
+      <div class="rf-footer">
+        <span class="rf-chars"><span id="charCount">0</span> / 400</span>
+        <button type="submit" class="btn-primary rf-submit">Post Review</button>
+      </div>
+    </form>
+    
+    <div id="reviewSuccess" class="review-success hidden">
+      <span class="success-icon">✓</span> Your review has been posted!
     </div>
   </section>
 
   <section class="ending">
-
     <footer class="foot">
-
       <h2>THE FILM VAULT <span class="spanner">TM</span></h2>
-
     </footer>
-
   </section>
 
+  <script>
+    // ── Star Picker Logic ──
+    const stars = document.querySelectorAll('.star');
+    const starLabel = document.getElementById('starLabel');
+    const labels = ['', 'Terrible', 'Poor', 'Average', 'Good', 'Masterpiece'];
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('mouseenter', () => highlightStars(+star.dataset.value));
+      star.addEventListener('mouseleave', () => highlightStars(selectedRating));
+      star.addEventListener('click', () => {
+        selectedRating = +star.dataset.value;
+        highlightStars(selectedRating);
+        starLabel.textContent = labels[selectedRating];
+        starLabel.classList.add('rated');
+      });
+    });
+
+    function highlightStars(n) {
+      stars.forEach(s => {
+        const v = +s.dataset.value;
+        s.classList.toggle('active', v <= n);
+        s.classList.toggle('dim', v > n);
+      });
+    }
+
+    // ── Char counter Logic ──
+    const rfText = document.getElementById('rfText');
+    const charCount = document.getElementById('charCount');
+    rfText.addEventListener('input', () => {
+      charCount.textContent = rfText.value.length;
+    });
+
+    function UserReview(phone, rating, text, name = 'Anonymous') {
+      this.name = name; 
+      this.phone = phone; // Storing it in the object, even if we don't display it
+      this.rating = rating;
+      this.text = text;
+
+      this.getStars = () => '★'.repeat(this.rating) + '☆'.repeat(5 - this.rating);
+      
+      // Standard method
+      this.getScore = function() {
+        const scoreMap = { 1: '2.0', 2: '4.0', 3: '6.0', 4: '8.0', 5: '10.0' };
+        return scoreMap[this.rating];
+      };
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      
+      const nameVal = document.getElementById('rfName').value.trim();
+      const phoneVal = document.getElementById('rfPhone').value.trim();
+      const textVal = rfText.value.trim();
+
+      // Rating must be selected
+      if (!selectedRating) { shakePicker(); return; }
+
+      // Validation 2: Phone must be exactly 10 digits and numbers only (Exp 5 Requirement)
+      if (phoneVal === "" || isNaN(phoneVal) || phoneVal.length !== 10) {
+        alert("Validation Error: Please enter a valid 10-digit telephone number.");
+        shakeEl(document.getElementById('rfPhone'));
+        return;
+      }
+
+      // Validation 3: Text cannot be empty
+      if (!textVal) { shakeEl(rfText); return; }
+
+      const newReviewObj = new UserReview(
+        phoneVal, 
+        selectedRating, 
+        textVal, 
+        nameVal === "" ? undefined : nameVal // Triggers default parameter if empty
+      );
+
+      // Build the new review HTML card
+      const card = document.createElement('div');
+      card.className = 'review-card new-review';
+      
+      card.innerHTML = `
+        <div class="review-header">
+          <div>
+            <p class="review-author">${newReviewObj.name}</p>
+            <div class="review-stars">${newReviewObj.getStars()}</div>
+          </div>
+          <span class="review-score">${newReviewObj.getScore()}</span>
+        </div>
+        <p class="review-text">${newReviewObj.text}</p>
+      `;
+
+      
+      const grid = document.querySelector('.review-grid');
+      grid.prepend(card);
+      requestAnimationFrame(() => card.classList.add('visible'));
+
+      // Show success message and reset the form
+      document.getElementById('reviewSuccess').classList.remove('hidden');
+      this.reset();
+      selectedRating = 0;
+      highlightStars(0);
+      starLabel.textContent = 'Select a rating';
+      starLabel.classList.remove('rated');
+      charCount.textContent = '0';
+
+      setTimeout(() => document.getElementById('reviewSuccess').classList.add('hidden'), 3500);
+    });
+
+    // ── UI Animation Helpers ──
+    function shakePicker() {
+      const p = document.getElementById('starPicker');
+      p.classList.add('shake');
+      setTimeout(() => p.classList.remove('shake'), 500);
+    }
+
+    function shakeEl(el) {
+      el.classList.add('shake');
+      setTimeout(() => el.classList.remove('shake'), 500);
+    }
+  </script>
 </body>
 </html>
