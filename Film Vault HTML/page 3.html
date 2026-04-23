@@ -119,3 +119,19 @@
 
 </body>
 </html>
+
+<script>
+  // ── Live Search Filter ──
+  const searchInput = document.querySelector('nav input');
+  const movieCards = document.querySelectorAll('.movie-wrapper');
+
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase(); // Get what the user typed
+    
+    movieCards.forEach(card => {
+      const title = card.querySelector('.movie-title').textContent.toLowerCase();
+      // If the title includes the search query, show it. Otherwise, hide it.
+      card.style.display = title.includes(query) ? 'flex' : 'none';
+    });
+  });
+</script>

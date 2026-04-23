@@ -36,6 +36,7 @@
         <span>Drama / Action</span>
         <span>English</span>
       </div>
+      <button id="watchlistBtn" class="btn-secondary" style="margin-top: 1rem; padding: 0.5rem 1rem;">+ Add to Watchlist</button>
     </div>
   </main>
 
@@ -261,6 +262,34 @@
       el.classList.add('shake');
       setTimeout(() => el.classList.remove('shake'), 500);
     }
+
+    //  local storage
+const watchBtn = document.getElementById('watchlistBtn');
+const movieTitle = "One Battle After Another"; // The current movie
+
+// 1. Check memory when the page loads
+let watchlist = JSON.parse(localStorage.getItem('vaultWatchlist')) || [];
+if (watchlist.includes(movieTitle)) {
+  watchBtn.textContent = "✓ In Watchlist";
+  watchBtn.style.color = "var(--gold)";
+}
+
+watchBtn.addEventListener('click', () => {
+  watchlist = JSON.parse(localStorage.getItem('vaultWatchlist')) || [];
+  
+  if (!watchlist.includes(movieTitle)) {
+    watchlist.push(movieTitle); // Add it
+    watchBtn.textContent = "✓ In Watchlist";
+    watchBtn.style.color = "var(--gold)";
+  } else {
+    watchlist = watchlist.filter(title => title !== movieTitle); // Remove it
+    watchBtn.textContent = "+ Add to Watchlist";
+    watchBtn.style.color = "var(--white)";
+  }
+  
+  // Save the updated list back to the browser's hard drive
+  localStorage.setItem('vaultWatchlist', JSON.stringify(watchlist));
+});
   </script>
 </body>
 </html>
