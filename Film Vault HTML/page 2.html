@@ -202,7 +202,6 @@
       // Rating must be selected
       if (!selectedRating) { shakePicker(); return; }
 
-      // Validation 2: Phone must be exactly 10 digits and numbers only (Exp 5 Requirement)
       if (phoneVal === "" || isNaN(phoneVal) || phoneVal.length !== 10) {
         alert("Validation Error: Please enter a valid 10-digit telephone number.");
         shakeEl(document.getElementById('rfPhone'));
